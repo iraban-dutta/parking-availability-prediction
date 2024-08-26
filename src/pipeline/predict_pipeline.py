@@ -122,6 +122,25 @@ class PredictOnUserInput:
             print(custom_exception)    
 
 
+    def occupancy_to_availability(self, fr_dict):
+        
+        try:
+            fr_mod_dict = {}
+            for ps_idx in list(fr_dict.keys()):
+                
+                fr_mod_dict[ps_idx] = {}
+                fr_mod_dict[ps_idx]['train'] = 100.0-fr_dict[ps_idx]['train']
+                fr_mod_dict[ps_idx]['test'] = 100-fr_dict[ps_idx]['test']
+                fr_mod_dict[ps_idx]['forecast'] = 100-fr_dict[ps_idx]['forecast']
+
+            return fr_mod_dict
+    
+        except Exception as e:
+            custom_exception =  CustomException(e, sys)
+            print(custom_exception)    
+
+
+
 
     def forcast_all_parkLots(self):
         
@@ -133,10 +152,10 @@ class PredictOnUserInput:
             # Get Forecasting steps:
             forecast_nsteps = self.get_forecast_steps()
 
-            # DEBUG:
-            print('Forecast steps:', forecast_nsteps)
-            print('Park Lot IDs:', list(self.data_dict.keys()))
-            print('Forecast Index List:', self.forecast_index_list)
+            # # DEBUG:
+            # print('Forecast steps:', forecast_nsteps)
+            # print('Park Lot IDs:', list(self.data_dict.keys()))
+            # print('Forecast Index List:', self.forecast_index_list)
 
             
             forecast_dict = {}
@@ -160,9 +179,18 @@ class PredictOnUserInput:
                 forecast_dict[ps_idx]['train'] = self.data_dict[ps_idx]['train']['Occupancy_Rate']
                 forecast_dict[ps_idx]['test'] = self.data_dict[ps_idx]['test']['Occupancy_Rate']
                 forecast_dict[ps_idx]['forecast'] = df_forecasted['Occupancy_Rate'].iloc[-forecast_nsteps:]
-                
-                
-            return forecast_dict            
+
+
+            # Get availability
+            forecast_availability_dict = self.occupancy_to_availability(forecast_dict)
+
+            # # DEBUG
+            # print(forecast_dict[1]['forecast'])
+            # print('-'*50)
+            # print(forecast_availability_dict[1]['forecast'])
+            # print('-'*50)
+
+            return forecast_availability_dict            
 
 
         except Exception as e:
@@ -182,8 +210,11 @@ if __name__=='__main__':
         print(test_dict[1]['test'].shape)
         print(test_dict[1]['forecast'].shape)
 
-        # print('Test-ORIGINAL:', test_dict[1]['test'].iloc[:34])
-        # print('Test-FORECAST:', test_dict[1]['forecast'])
+        print('Test-ORIGINAL:')
+        print(test_dict[1]['test'].iloc[:34])
+        print('-'*50)
+        print('Test-FORECAST:')
+        print(test_dict[1]['forecast'])
     
     except Exception as e:
         custom_exception =  CustomException(e, sys)

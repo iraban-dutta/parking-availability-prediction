@@ -213,7 +213,7 @@ def forecast(user_inp_date:str, user_inp_time:str):
 def main():
 
     try:
-        
+
         # Page configuration for wide layout
         st.set_page_config(APP_TITLE, layout="centered")
 
@@ -271,7 +271,7 @@ def main():
 
 
         # Create sidebar for user input: Date and time
-        st.sidebar.header("Parking Availability Prediction")
+        st.sidebar.header("Specify date and time for forecast")
         selected_date = st.sidebar.date_input("Select Date", min_value=pd.to_datetime('2016-12-13'), max_value=pd.to_datetime('2016-12-19'))
         selected_time = st.sidebar.selectbox("Select Time", ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", 
                                                             "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", 
@@ -361,15 +361,6 @@ def main():
 
 
     
-
-
-
-
-
-
-
-
-
 if __name__ == "__main__":
     main()
 
@@ -390,123 +381,3 @@ if __name__ == "__main__":
 
 
 
-
-
-
-
-# # Page configuration for wide layout
-# st.set_page_config(layout="wide")
-
-
-# # Applying custom CSS for consistent padding and title styling
-# st.markdown("""
-#     <style>
-#         .reportview-container .main .block-container {
-#             padding-top: 2rem;
-#             padding-right: 1rem;
-#             padding-left: 1rem;
-#             padding-bottom: 2rem;
-#             max-width: 1200px;
-#         }
-#         h1 {
-#             font-size: 2.5rem;
-#             font-weight: bold;
-#             text-align: center;
-#             color: #1892BA; /* Optional: Make title color green */
-#         }
-#         .stSidebar {
-#             background-color: #f0f2f6;
-#             padding: 1rem;
-#         }
-#         .centered-text {
-#             text-align: center;
-#             font-size: 1.25rem; /* Adjust font size here */
-#             color: #E6EBED; /* Optional: Adjust text color */
-#         }
-#         .stButton button {
-#             width: 60%;
-#             padding: 0.75rem;
-#             background-color: red;
-#             color: white !important;
-#             border-radius: 0.5rem;
-#             margin: 1rem auto;
-#             cursor: pointer;
-#             border: none;
-#             display: block;
-#             text-align: center;
-#             font-weight: bold;
-#             font-size: 1.5rem !important;
-            
-#         }
-#         .stButton button:hover {
-#             background-color: green;
-#             color: white;
-#         }
-#         .map-container {
-#             display: flex;
-#             justify-content: center;
-#             width: 100%;
-#         }
-#         .map-container .folium-map {
-#             width: 100% !important;
-#             height: 600px; /* Set a height for the map */
-#         }
-#     </style>
-#     """, unsafe_allow_html=True)
-
-
-
-# # Load the geo-locations of parking lots
-# df_lat_long = pd.read_csv('artifacts/df_ps_lat_long.csv')  # Contains latitude, longitude of parking lots
-
-
-# # Create sidebar for user input: Date and time
-# st.sidebar.header("Parking Availability Prediction")
-# selected_date = st.sidebar.date_input("Select Date", min_value=pd.to_datetime('2016-12-13'), max_value=pd.to_datetime('2016-12-19'))
-# selected_time = st.sidebar.selectbox("Select Time", ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", 
-#                                                      "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", 
-#                                                      "14:00", "14:30", "15:00", "15:30", "16:00", "16:30"])
-
-
-
-# # Create a predict button with custom styling
-# predict_clicked = st.sidebar.button("Predict")
-
-
-
-
-
-
-
-# print('Session State:', st.session_state)
-
-
-
-
-
-
-# # Handle the map based on predictions or show initial map
-# if predict_clicked:
-#     print(str(selected_date))
-#     print(str(selected_time)) 
-
-
-
-
-
-
-
-
-# # Main Ttitle
-# st.title("Birmingham Parking Availability Prediction")
-
-# # Sub-Title
-# st.markdown("<div class='centered-text'>Select a date and time to see the forecasted availability, and click on a parking lot to explore its historical and forecasted trends.</div>", unsafe_allow_html=True)
-
-
-
-# # Render the map centered
-# with st.container():
-#     st.markdown('<div class="map-container">', unsafe_allow_html=True)
-#     folium_static(map_)
-#     st.markdown('</div>', unsafe_allow_html=True)

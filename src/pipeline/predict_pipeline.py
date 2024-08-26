@@ -1,8 +1,8 @@
 import sys
 import numpy as np
 import pandas as pd
-# from sklearn.preprocessing import StandardScaler
-# import xgboost as xgb
+from sklearn.preprocessing import StandardScaler
+import xgboost as xgb
 from src.exception import CustomException
 from src.utils import load_object
 

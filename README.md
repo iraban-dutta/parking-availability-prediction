@@ -4,6 +4,7 @@
 ### **Important Links:**
 1. [Deployed Web Application](https://parking-availability-prediction.onrender.com/) (Deployment is on a free cloud plan, which may result in slower initial load times)
 2. [Technical Blog](https://medium.com/@irabandutta.2020/predicting-parking-space-availability-in-birmingham-085432404d37)
+3. [Demo Video](https://drive.google.com/file/d/1uxY8HGA8GL-yMPlaMs27Vjs5OYwVkuHq/view?usp=sharing)
 
 
 <!-- ------------------------------------------------------------------------------------------------ -->
